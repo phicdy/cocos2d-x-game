@@ -1,0 +1,11 @@
+cocos2d/
+
+proj.ios_mac/
+proj.win32/
+proj.linux/
+proj.wp8-xaml/
+
+proj.android/gen/
+proj.android/bin/
+proj.android/obj/
+proj.android/libs/armeabi/
