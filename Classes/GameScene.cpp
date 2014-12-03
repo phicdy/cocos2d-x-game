@@ -135,6 +135,34 @@ void GameScene::checkForCollision() {
 		node->unscheduleAllCallbacks();
 		SimpleAudioEngine::getInstance()->setEffectsVolume(0.5f);
 		SimpleAudioEngine::getInstance()->playEffect("collision.mp3");
+
+		CCAnimation* animation = CCAnimation::create();
+
+		// 移動1 → 停止 → 移動2 → 停止の4コマアニメーション
+		animation->addSpriteFrameWithFileName("explosion1.png");
+		animation->addSpriteFrameWithFileName("explosion2.png");
+		animation->addSpriteFrameWithFileName("explosion3.png");
+		animation->addSpriteFrameWithFileName("explosion4.png");
+		animation->addSpriteFrameWithFileName("explosion5.png");
+		animation->addSpriteFrameWithFileName("explosion6.png");
+		animation->addSpriteFrameWithFileName("explosion7.png");
+		animation->addSpriteFrameWithFileName("explosion8.png");
+		animation->addSpriteFrameWithFileName("explosion9.png");
+		animation->addSpriteFrameWithFileName("explosion10.png");
+		animation->addSpriteFrameWithFileName("explosion11.png");
+		animation->addSpriteFrameWithFileName("explosion12.png");
+		animation->addSpriteFrameWithFileName("explosion13.png");
+		animation->addSpriteFrameWithFileName("explosion14.png");
+		animation->addSpriteFrameWithFileName("explosion15.png");
+
+		//アニメーションの設定 1 : 1コマ0.1秒で切り替える。
+		animation->setDelayPerUnit(0.1);
+		//アニメーションの設定 2 : 5回ループさせる。
+		//(4コマかける5回ループで2秒になり、移動同時に終了するようにしている)
+		animation->setLoops(1);
+		//4. アニメーションの実行
+		CCAnimate* animate = CCAnimate::create(animation);
+		virus->runAction(animate);
 	}
 }
 
