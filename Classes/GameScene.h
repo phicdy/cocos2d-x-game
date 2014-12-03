@@ -28,6 +28,7 @@ public:
 	void initBackground();
 	void initVirus();
 	void updateVirus(float delta);
+	void checkForCollision();
 
 	CREATE_FUNC(GameScene);
 

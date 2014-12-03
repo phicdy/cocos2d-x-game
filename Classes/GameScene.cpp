@@ -90,6 +90,13 @@ void GameScene::update(float delta) {
 	position.x += 5;
 
 	trendoc->setPosition(position);
+
+	Size winSize = Director::getInstance()->getVisibleSize();
+	if (position.x > winSize.width) {
+		position.x = 0;
+		trendoc->setPosition(position);
+	}
+	checkForCollision();
 }
 
 void GameScene::initBackground() {
@@ -105,10 +112,24 @@ void GameScene::initBackground() {
 void GameScene::initVirus() {
 	virus = Sprite::create("virus.png");
 	virus->setTag(1);
+	Size screensize = Director::getInstance()->getVisibleSize();
 	virus->setPosition(Vec2(screensize.width / 2, screensize.height / 2));
 	this->addChild(virus);
+
+	virus->runAction(MoveTo::create(5.0f,Point(virus->getPosition().x,50)));
+	this->schedule(schedule_selector(GameScene::updateVirus), 0.6f);
 }
 
 void GameScene::updateVirus(float delta) {
 
+	Size winSize = Director::getInstance()->getVisibleSize();
+//	CCLog("%f",virus->getPosition().x);
+//	virus->runAction(MoveTo::create(5.0f,Point(virus->getPosition().x,50)));
+}
+
+void GameScene::checkForCollision() {
+	if (virus->getBoundingBox().intersectsRect(trendoc->getBoundingBox())) {
+		CCLog("Collision!");
+
+	}
 }
