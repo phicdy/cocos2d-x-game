@@ -6,6 +6,7 @@
  */
 
 #include "GameScene.h"
+#include "Bullet.h"
 
 USING_NS_CC;
 
@@ -35,6 +36,7 @@ bool GameScene::init() {
 
 	initBackground();
 	initVirus();
+	initBullet();
 
 	trendoc = Sprite::create("trendoc.png");
 	trendoc->setTag(2);
@@ -130,6 +132,38 @@ void GameScene::updateVirus(float delta) {
 void GameScene::checkForCollision() {
 	if (virus->getBoundingBox().intersectsRect(trendoc->getBoundingBox())) {
 		CCLog("Collision!");
+	}
+}
 
+void GameScene::initBullet() {
+	SpriteBatchNode *batch = SpriteBatchNode::create("bullet.png", 10);
+	batch->setTag(3);
+	this->addChild(batch);
+
+	for (int i = 0; i < 100; i++) {
+		Bullet *bullet = Bullet::bullet();
+		bullet->setVisible(false);
+		batch->addChild(bullet);
+	}
+}
+
+SpriteBatchNode* GameScene::getBullet() {
+	Node *node = this->getChildByTag(3);
+	return (SpriteBatchNode*)node;
+}
+
+void GameScene::shootBulletFromTrendoc(cocos2d::Sprite *trendoc) {
+	SpriteBatchNode *bullets = this->getBullet();
+	Vector<Node*> bulletsArray = bullets->getChildren();
+
+	Node *node = bulletsArray.at(nextInactiveBullet);
+
+	Bullet *bullet = (Bullet*)node;
+	bullet->shootBulletFromTrendoc(trendoc);
+
+	// Set index
+	nextInactiveBullet++;
+	if(nextInactiveBullet >= bulletsArray.size()) {
+		nextInactiveBullet = 0;
 	}
 }
