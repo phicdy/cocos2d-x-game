@@ -13,7 +13,7 @@ public:
 	virtual bool init();
 	static Bullet* initWithBulletImage();
 	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
-	void update(float delta);
+	void updateBullet(float delta);
 
 	CREATE_FUNC(Bullet);
 };

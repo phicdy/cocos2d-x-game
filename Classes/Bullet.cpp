@@ -28,11 +28,13 @@ void Bullet::shootBulletFromTrendoc(Sprite *trendoc) {
 	this->setPosition(Vec2(trendoc->getPosition().x + trendoc->getContentSize().width * 0.5f, trendoc->getPosition().y));
 	this->setVisible(true);
 
-	this->scheduleUpdate();
+	this->schedule(schedule_selector(Bullet::updateBullet));
 }
 
-void Bullet::update(float delta) {
-	this->setPosition(this->getPosition() + velocity);
+void Bullet::updateBullet(float delta) {
+	auto position = this->getPosition();
+	position.x += 15;
+	this->setPosition(position);
 
 	if (this->getPosition().x > outsideScreen) {
 		this->setVisible(false);
