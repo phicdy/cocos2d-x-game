@@ -88,16 +88,7 @@ void GameScene::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event) {
 
 void GameScene::update(float delta) {
 
-	Vec2 position = trendoc->getPosition();
-	position.x += 5;
 
-	trendoc->setPosition(position);
-
-	Size winSize = Director::getInstance()->getVisibleSize();
-	if (position.x > winSize.width) {
-		position.x = 0;
-		trendoc->setPosition(position);
-	}
 	checkForCollision();
 }
 
