@@ -66,12 +66,8 @@ bool GameScene::init() {
 }
 
 bool GameScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
-
-	auto virus = this->getChildByTag(1);
-	virus->setPosition(virus->getPosition().x + 10,
-			virus->getPosition().y + 10);
+	this->shootBulletFromTrendoc(trendoc);
 	return true;
-
 }
 
 void GameScene::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
