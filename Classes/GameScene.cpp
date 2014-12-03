@@ -7,6 +7,8 @@
 
 #include "GameScene.h"
 #include "Bullet.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 USING_NS_CC;
 
@@ -59,6 +61,8 @@ bool GameScene::init() {
 
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(listener, this);
+
+	SimpleAudioEngine::getInstance()->preloadEffect("collision.mp3");
 
 	this->scheduleUpdate();
 
@@ -117,8 +121,20 @@ void GameScene::updateVirus(float delta) {
 }
 
 void GameScene::checkForCollision() {
-	if (virus->getBoundingBox().intersectsRect(trendoc->getBoundingBox())) {
+	if(nextInactiveBullet == 0) {
+		return;
+	}
+	SpriteBatchNode *bullets = this->getBullet();
+	Vector<Node*> bulletsArray = bullets->getChildren();
+
+	Node *node = bulletsArray.at(nextInactiveBullet-1);
+	if (virus->getBoundingBox().intersectsRect(node->getBoundingBox())) {
 		CCLog("Collision!");
+		node->setPosition(-1,-1);
+		node->setVisible(false);
+		node->unscheduleAllCallbacks();
+		SimpleAudioEngine::getInstance()->setEffectsVolume(0.5f);
+		SimpleAudioEngine::getInstance()->playEffect("collision.mp3");
 	}
 }
 
