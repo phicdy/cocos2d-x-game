@@ -30,12 +30,12 @@ public:
 	void initVirus();
 	void initBullet();
 	void updateVirus(float delta);
+	void checkForCollision();
 
 	cocos2d::SpriteBatchNode* getBullet();
 	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
 
 	CREATE_FUNC(GameScene);
-
 };
 
 
