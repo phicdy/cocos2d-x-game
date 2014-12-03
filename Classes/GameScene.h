@@ -16,6 +16,7 @@ public:
 	cocos2d::Point *trendocVelocity;
 	cocos2d::Sprite *trendoc;
 	cocos2d::Sprite *virus;
+	int nextInactiveBullet = 0;
 
 	static cocos2d::Scene*scene();
 	virtual bool init();
@@ -27,8 +28,11 @@ public:
 	void update(float delta);
 	void initBackground();
 	void initVirus();
+	void initBullet();
 	void updateVirus(float delta);
-	void checkForCollision();
+
+	cocos2d::SpriteBatchNode* getBullet();
+	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
 
 	CREATE_FUNC(GameScene);
 
