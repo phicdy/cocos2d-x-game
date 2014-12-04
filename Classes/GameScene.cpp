@@ -162,7 +162,15 @@ void GameScene::checkForCollision() {
 		animation->setLoops(1);
 		//4. アニメーションの実行
 		CCAnimate* animate = CCAnimate::create(animation);
-		virus->runAction(animate);
+//		virus->runAction(animate);
+		CallFunc *compCallFunc = CallFunc::create([this](){
+			virus->setVisible(false);
+			virus->setPosition(-100,-100);
+		 });
+
+		 Sequence *sequence = Sequence::create(animate,compCallFunc,NULL);
+
+		 virus->runAction(sequence);
 	}
 }
 
