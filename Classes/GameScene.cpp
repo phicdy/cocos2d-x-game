@@ -130,6 +130,8 @@ void GameScene::checkForCollision() {
 	Node *node = bulletsArray.at(nextInactiveBullet-1);
 	if (virus->getBoundingBox().intersectsRect(node->getBoundingBox())) {
 		CCLog("Collision!");
+		virus->unscheduleAllCallbacks();
+
 		node->setPosition(-1,-1);
 		node->setVisible(false);
 		node->unscheduleAllCallbacks();
