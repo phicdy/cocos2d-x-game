@@ -1,6 +1,6 @@
 #include "SneakyButton.h"
 
-using namespace cocos2d;
+//using namespace cocos2d;
 USING_NS_CC;
 
 void SneakyButton::onEnterTransitionDidFinish()
