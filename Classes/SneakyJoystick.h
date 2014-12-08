@@ -24,7 +24,7 @@ protected:
 
 	virtual ~SneakyJoystick();
 
-	bool initWithRect(cocos2d::CCRect rect);
+	bool initWithRect(cocos2d::Rect rect);
 	virtual void onEnterTransitionDidFinish();
 	virtual void onExit();
 	void setIsDPad(bool b);

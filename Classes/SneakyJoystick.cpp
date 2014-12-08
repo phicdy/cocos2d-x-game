@@ -11,7 +11,7 @@ SneakyJoystick::~SneakyJoystick()
 {
 }
 
-bool SneakyJoystick::initWithRect(CCRect rect)
+bool SneakyJoystick::initWithRect(Rect rect)
 {
 	bool pRet = false;
 	//if(CCSprite::init()){
