@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 
-class SneakyButton : public cocos2d::CCNode, public cocos2d::CCTargetedTouchDelegate
+class SneakyButton : public cocos2d::Node, public cocos2d::EventDispatcher
 {
 protected:
 	cocos2d::CCPoint center;
