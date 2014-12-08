@@ -29,6 +29,24 @@ bool SneakyJoystick::initWithRect(CCRect rect)
 		
 		//Cocos node stuff
 		setPosition(rect.origin);
+
+		auto touchListener = EventListenerTouchOneByOne::create();
+		touchListener->onTouchBegan = [this](Touch* touch, Event* event) -> bool {
+			ccTouchBegan(touch, event);
+		};
+
+		touchListener->onTouchMoved = [this](Touch* touch, Event* event) {
+			ccTouchMoved(touch, event);
+		};
+
+		touchListener->onTouchEnded = [this](Touch* touch, Event* event) {
+			ccTouchEnded(touch, event);
+		};
+
+		touchListener->onTouchCancelled = [this](Touch* touch, Event* event) {
+			ccTouchCancelled(touch, event);
+		};
+
 		pRet = true;
 	//}
 	return pRet;
