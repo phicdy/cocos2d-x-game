@@ -54,12 +54,12 @@ bool SneakyJoystick::initWithRect(CCRect rect)
 
 void SneakyJoystick::onEnterTransitionDidFinish()
 {
-	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
+//	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
 }
 
 void SneakyJoystick::onExit()
 {
-	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+//	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
 float round(float r) {
@@ -178,12 +178,12 @@ void SneakyJoystick::ccTouchCancelled(CCTouch *touch, CCEvent *event)
 
 void SneakyJoystick::touchDelegateRelease()
 {
-	this->release();
+//	this->release();
 }
 
 void SneakyJoystick::touchDelegateRetain()
 {
-	this->retain();
+//	this->retain();
 }
 
 
