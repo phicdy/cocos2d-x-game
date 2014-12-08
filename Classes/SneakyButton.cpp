@@ -1,15 +1,16 @@
 #include "SneakyButton.h"
 
 using namespace cocos2d;
+USING_NS_CC;
 
 void SneakyButton::onEnterTransitionDidFinish()
 {
-	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
+//	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
 }
 
 void SneakyButton::onExit()
 {
-	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+//	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
 bool SneakyButton::initWithRect(CCRect rect)
@@ -55,7 +56,7 @@ bool SneakyButton::initWithRect(CCRect rect)
 void SneakyButton::limiter(float delta)
 {
 	value = 0;
-	this->unschedule(schedule_selector(SneakyButton::limiter));
+	this->unscheduleAllCallbacks();
 	active = false;
 }
 
@@ -80,7 +81,7 @@ bool SneakyButton::ccTouchBegan(CCTouch *touch, CCEvent *event)
 			active = true;
 			if (!isHoldable && !isToggleable){
 				value = 1;
-				this->schedule(schedule_selector(SneakyButton::limiter), rateLimit);
+				this->schedule(schedule_selector(SneakyButton::limiter));
 			}
 			if (isHoldable) value = 1;
 			if (isToggleable) value = !value;
@@ -124,10 +125,10 @@ void SneakyButton::ccTouchCancelled(CCTouch *touch, CCEvent *event)
 
 void SneakyButton::touchDelegateRelease()
 {
-	this->release();
+//	this->release();
 }
 
 void SneakyButton::touchDelegateRetain()
 {
-	this->retain();
+//	this->retain();
 }

@@ -17,7 +17,7 @@ SneakyJoystickSkinnedBase::~SneakyJoystickSkinnedBase()
 
 	if (joystick)
 	{
-		joystick->release();
+//		joystick->release();
 		joystick = NULL;
 	}
 }
@@ -88,9 +88,9 @@ void SneakyJoystickSkinnedBase::setJoystick(SneakyJoystick *aJoystick)
 	if(joystick){
 		if(joystick->getParent())
 			joystick->getParent()->removeChild(joystick, true);
-		joystick->release();
+//		joystick->release();
 	}
-	aJoystick->retain();
+//	aJoystick->retain();
 	joystick = aJoystick;
 	if(aJoystick){
 		this->addChild(aJoystick, 2);

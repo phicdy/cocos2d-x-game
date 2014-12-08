@@ -26,7 +26,7 @@ SneakyButtonSkinnedBase::~SneakyButtonSkinnedBase()
 	}
 	if (button)
 	{
-		button->release();
+//		button->release();
 		button = NULL;
 	}
 }
@@ -160,9 +160,9 @@ void SneakyButtonSkinnedBase::setButton(SneakyButton *aButton)
 	if(button){
 		if(button->getParent())
 			button->getParent()->removeChild(button, true);
-		button->release();
+//		button->release();
 	}
-	aButton->retain();
+//	aButton->retain();
 	button = aButton;
 	if(aButton){
 		this->addChild(button, 4);
