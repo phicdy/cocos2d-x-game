@@ -9,7 +9,7 @@
 #define GAMESCENE_H_
 
 #include "cocos2d.h"
-
+#include "SneakyJoystick.h"
 
 class GameScene: public cocos2d::Layer {
 public:
@@ -17,6 +17,7 @@ public:
 	cocos2d::Sprite *trendoc;
 	cocos2d::Sprite *virus;
 	int nextInactiveBullet = 0;
+	SneakyJoystick *joystick;
 
 	static cocos2d::Scene*scene();
 	virtual bool init();

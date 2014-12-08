@@ -8,6 +8,11 @@
 #include "GameScene.h"
 #include "Bullet.h"
 #include "SimpleAudioEngine.h"
+#include "SneakyButton.h"
+#include "SneakyButtonSkinnedBase.h"
+#include "SneakyJoystick.h"
+#include "SneakyJoystickSkinnedBase.h"
+
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -65,6 +70,24 @@ bool GameScene::init() {
 	SimpleAudioEngine::getInstance()->preloadEffect("collision.mp3");
 
 	this->scheduleUpdate();
+
+	SneakyJoystick *joystickbase = new SneakyJoystick();
+	joystickbase->initWithRect(CCRectMake(0, 0, 100.0f, 100.0f));
+
+	SneakyJoystickSkinnedBase *skinjoystick = SneakyJoystickSkinnedBase::create();
+	skinjoystick->setBackgroundSprite(Sprite::create("jyostric1.png"));
+	skinjoystick->setThumbSprite(Sprite::create("jyostric2.png"));
+	skinjoystick->setJoystick(joystickbase);
+	skinjoystick->setPosition(ccp(550,50));
+
+	//ヘッダーで    SneakyJoystick *joystickと定義をしてます。
+	joystick = skinjoystick->getJoystick();
+	joystick->setAutoCenter(true);
+	joystick->setHasDeadzone(true);
+
+	this->setVisible(false);
+
+	this->addChild(skinjoystick,10);
 
 	return true;
 }
