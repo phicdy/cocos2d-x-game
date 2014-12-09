@@ -60,9 +60,7 @@ bool GameScene::init() {
 	auto director = Director::getInstance();
 	Size screensize = director->getWinSize();
 
-	trendoc->setPosition(
-			Vec2(trendoc->getContentSize().width / 2,
-					trendoc->getContentSize().height / 2));
+	trendoc->setPosition(trendoc->getContentSize().width / 2,screensize.height / 2);
 	this->addChild(trendoc, 0);
 
 	// Enable touch
