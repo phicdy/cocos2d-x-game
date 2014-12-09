@@ -6,12 +6,9 @@
  */
 
 #include "GameScene.h"
+#include "InputLayer.h"
 #include "Bullet.h"
 #include "SimpleAudioEngine.h"
-#include "SneakyButton.h"
-#include "SneakyButtonSkinnedBase.h"
-#include "SneakyJoystick.h"
-#include "SneakyJoystickSkinnedBase.h"
 
 using namespace CocosDenshion;
 
@@ -26,8 +23,12 @@ Scene *GameScene::scene()
 	// 'layer' is an autorelease object
 	auto layer = GameScene::create();
 
+	auto inputLayer = InputLayer::create();
+
 	// add layer as a child to scene
-	scene->addChild(layer);
+	scene->addChild(layer, 0, GameSceneLayerTagGame);
+	scene->addChild(inputLayer, 1, GameSceneLayerTagInput);
+
 
 	// return the scene
 	return scene;
