@@ -22,6 +22,7 @@ public:
 	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput};
 
 	static cocos2d::Scene*scene();
+	static GameScene* getSharedGameScene();
 	virtual bool init();
 
 	bool onTouchBegan(cocos2d::Touch* touch,cocos2d::Event* event);
