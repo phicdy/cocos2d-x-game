@@ -17,6 +17,8 @@
 class InputLayer: public cocos2d::Layer {
 public:
 	SneakyButton *fireButton;
+	double totalTime;
+	double nextShotTime;
 
 	virtual bool init();
 	void addFireButton();
