@@ -85,8 +85,6 @@ bool GameScene::init() {
 	joystick->setAutoCenter(true);
 	joystick->setHasDeadzone(true);
 
-	this->setVisible(false);
-
 	this->addChild(skinjoystick,10);
 
 	return true;
