@@ -9,9 +9,17 @@
 #define INPUTLAYER_H_
 
 #include "cocos2d.h"
+#include "SneakyButton.h"
+#include "SneakyButtonSkinnedBase.h"
+#include "SneakyJoystick.h"
+#include "SneakyJoystickSkinnedBase.h"
 
 class InputLayer: public cocos2d::Layer {
 public:
+	SneakyButton *fireButton;
+
+	virtual bool init();
+	void addFireButton;
 
 	CREATE_FUNC(InputLayer);
 };
