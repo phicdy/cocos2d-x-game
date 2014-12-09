@@ -79,10 +79,27 @@ void InputLayer::update(float delta) {
 
 	Sprite *trendoc = game->trendoc;
 	Point velocity = ccpMult(joystick->getVelocity(), 200);
-	CCLOG("joystick velocity.x: %c",joystick->getVelocity().x);
-	CCLOG("joystick velocity.y: %c",joystick->getVelocity().y);
 	if (velocity.x != 0 && velocity.y != 0) {
-		trendoc->setPosition(trendoc->getPosition().x + velocity.x * delta, trendoc->getPosition().y + velocity.y * delta);
+		float newX = trendoc->getPosition().x + velocity.x * delta;
+		float newY = trendoc->getPosition().y + velocity.y * delta;
+
+		float halfWidth = trendoc->getContentSize().width * 0.5f;
+		float halfHeight = trendoc->getContentSize().height * 0.5f;
+		Size screensize = Director::getInstance()->getVisibleSize();
+
+		if (newX < halfWidth) {
+			newX = halfWidth;
+		}else if (newX > (screensize.width - halfWidth)) {
+			newX = screensize.width - halfWidth;
+		}
+
+		if (newY < halfHeight) {
+			newY = halfHeight;
+		}else if (newY > (screensize.height - halfHeight)) {
+			newY = screensize.height - halfHeight;
+		}
+
+		trendoc->setPosition(newX, newY);
 	}
 
 }
