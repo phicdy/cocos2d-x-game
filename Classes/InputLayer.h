@@ -19,7 +19,7 @@ public:
 	SneakyButton *fireButton;
 
 	virtual bool init();
-	void addFireButton;
+	void addFireButton();
 
 	CREATE_FUNC(InputLayer);
 };

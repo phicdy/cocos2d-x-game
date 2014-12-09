@@ -20,13 +20,20 @@ bool InputLayer::init() {
 }
 
 void InputLayer::addFireButton() {
-	float buttonRadius = 80;
+	float buttonRadius = 50;
 	Size screensize = Director::getInstance()->getVisibleSize();
 
-	fireButton = SneakyButton::initWithRect(Rect::ZERO);
-	fireButton.radius = buttonRadius;
-	fireButton->setPosition(screensize.width - buttonRadius, buttonRadius);
+	fireButton = new SneakyButton();
+	fireButton->initWithRect(Rect::ZERO);
+	fireButton->setIsHoldable(true);
 
-	this->addChild(fireButton);
+	SneakyButtonSkinnedBase *skinFireButton = SneakyButtonSkinnedBase::create();
+	skinFireButton->setPosition(screensize.width - buttonRadius, buttonRadius);
+	skinFireButton->setDefaultSprite(Sprite::create("button-default.png"));
+	skinFireButton->setActivatedSprite(Sprite::create("button-default.png"));
+	skinFireButton->setPressSprite(Sprite::create("button-pressed.png"));
+	skinFireButton->setButton(fireButton);
+
+	this->addChild(skinFireButton);
 }
 
