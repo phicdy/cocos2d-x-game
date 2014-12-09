@@ -19,6 +19,8 @@ public:
 	int nextInactiveBullet = 0;
 	SneakyJoystick *joystick;
 
+	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput};
+
 	static cocos2d::Scene*scene();
 	virtual bool init();
 
