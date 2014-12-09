@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/SneakyButtonSkinnedBase.cpp \
                    ../../Classes/SneakyJoystick.cpp \
                    ../../Classes/SneakyJoystickSkinnedBase.cpp \
+                   ../../Classes/InputLayer.cpp \
                    ../../Classes/Bullet.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
