@@ -17,11 +17,13 @@
 class InputLayer: public cocos2d::Layer {
 public:
 	SneakyButton *fireButton;
+	SneakyJoystick *joystick;
 	double totalTime;
 	double nextShotTime;
 
 	virtual bool init();
 	void addFireButton();
+	void addJoyStick();
 	void update(float delta);
 
 	CREATE_FUNC(InputLayer);
