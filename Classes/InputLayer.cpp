@@ -6,6 +6,8 @@
  */
 
 #include "InputLayer.h"
+#include "SneakyButton.h"
+#include "SneakyButtonSkinnedBase.h"
 
 USING_NS_CC;
 
