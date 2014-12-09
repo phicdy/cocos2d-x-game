@@ -63,55 +63,11 @@ bool GameScene::init() {
 	trendoc->setPosition(trendoc->getContentSize().width / 2,screensize.height / 2);
 	this->addChild(trendoc, 0);
 
-	// Enable touch
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->setSwallowTouches(true);
-
-	listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
-	listener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved,this);
-	listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
-
-	auto dip = Director::getInstance()->getEventDispatcher();
-	dip->addEventListenerWithSceneGraphPriority(listener, this);
-
 	SimpleAudioEngine::getInstance()->preloadEffect("collision.mp3");
 
 	this->scheduleUpdate();
 
-	SneakyJoystick *joystickbase = new SneakyJoystick();
-	joystickbase->initWithRect(CCRectMake(0, 0, 100.0f, 100.0f));
-
-	SneakyJoystickSkinnedBase *skinjoystick = SneakyJoystickSkinnedBase::create();
-	skinjoystick->setBackgroundSprite(Sprite::create("jyostric1.png"));
-	skinjoystick->setThumbSprite(Sprite::create("jyostric2.png"));
-	skinjoystick->setJoystick(joystickbase);
-	skinjoystick->setPosition(ccp(550,50));
-
-	//ヘッダーで    SneakyJoystick *joystickと定義をしてます。
-	joystick = skinjoystick->getJoystick();
-	joystick->setAutoCenter(true);
-	joystick->setHasDeadzone(true);
-
-	this->addChild(skinjoystick,10);
-
 	return true;
-}
-
-bool GameScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
-	this->shootBulletFromTrendoc(trendoc);
-	return true;
-}
-
-void GameScene::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
-
-	//繧ｿ繝�メ荳ｭ縺ｮ蜃ｦ逅�
-
-}
-
-void GameScene::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event) {
-
-	//繧ｿ繝�メ縺檎ｵゅｏ縺｣縺滓凾縺ｮ蜃ｦ逅�
-
 }
 
 void GameScene::update(float delta) {
