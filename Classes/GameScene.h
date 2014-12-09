@@ -25,10 +25,6 @@ public:
 	static GameScene* getSharedGameScene();
 	virtual bool init();
 
-	bool onTouchBegan(cocos2d::Touch* touch,cocos2d::Event* event);
-	void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
-	void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
-
 	void update(float delta);
 	void initBackground();
 	void initVirus();
