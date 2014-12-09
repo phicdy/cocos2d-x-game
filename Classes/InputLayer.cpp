@@ -17,7 +17,7 @@ bool InputLayer::init() {
 	}
 
 	this->addFireButton();
-
+	this->scheduleUpdate();
 	return true;
 }
 
@@ -38,4 +38,11 @@ void InputLayer::addFireButton() {
 
 	this->addChild(skinFireButton);
 }
+
+void InputLayer::update(float delta) {
+	if (fireButton->getIsActive()) {
+		CCLOG("Fire!");
+	}
+}
+
 

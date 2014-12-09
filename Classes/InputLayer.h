@@ -20,6 +20,7 @@ public:
 
 	virtual bool init();
 	void addFireButton();
+	void update(float delta);
 
 	CREATE_FUNC(InputLayer);
 };
