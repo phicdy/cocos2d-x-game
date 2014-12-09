@@ -14,6 +14,12 @@ using namespace CocosDenshion;
 
 USING_NS_CC;
 
+static GameScene *instanceOfGameScene;
+
+GameScene* GameScene::getSharedGameScene() {
+	return instanceOfGameScene;
+}
+
 Scene *GameScene::scene()
 //static cocos2d::Scene*scene();
 {
@@ -41,6 +47,8 @@ bool GameScene::init() {
 	if (!Layer::init()) {
 		return false;
 	}
+
+	instanceOfGameScene = this;
 
 	initBackground();
 	initVirus();
