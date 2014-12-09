@@ -84,14 +84,14 @@ void SneakyButtonSkinnedBase::watchSelf(float delta) //Be Careful Here
 	}
 }
 
-void SneakyButtonSkinnedBase::setContentSize(CCSize s)
+void SneakyButtonSkinnedBase::setContentSize(Size s)
 {
 	CCLayer::setContentSize(s);
 	defaultSprite->setContentSize(s);
 	//button->setRadius(s.width/2);
 }
 
-void SneakyButtonSkinnedBase::setDefaultSprite(CCSprite *aSprite)
+void SneakyButtonSkinnedBase::setDefaultSprite(Sprite *aSprite)
 {
 	if(defaultSprite){
 		if(defaultSprite->getParent())
@@ -107,7 +107,7 @@ void SneakyButtonSkinnedBase::setDefaultSprite(CCSprite *aSprite)
 	}
 }
 
-void SneakyButtonSkinnedBase::setActivatedSprite(CCSprite *aSprite)
+void SneakyButtonSkinnedBase::setActivatedSprite(Sprite *aSprite)
 {
 	if(activatedSprite){
 		if(activatedSprite->getParent())
@@ -123,7 +123,7 @@ void SneakyButtonSkinnedBase::setActivatedSprite(CCSprite *aSprite)
 	}
 }
 
-void SneakyButtonSkinnedBase::setDisabledSprite(CCSprite *aSprite)
+void SneakyButtonSkinnedBase::setDisabledSprite(Sprite *aSprite)
 {
 	if(disabledSprite){
 		if(disabledSprite->getParent())
@@ -139,7 +139,7 @@ void SneakyButtonSkinnedBase::setDisabledSprite(CCSprite *aSprite)
 	}
 }
 
-void SneakyButtonSkinnedBase::setPressSprite(CCSprite *aSprite)
+void SneakyButtonSkinnedBase::setPressSprite(Sprite *aSprite)
 {
 	if(pressSprite){
 		if(pressSprite->getParent())
