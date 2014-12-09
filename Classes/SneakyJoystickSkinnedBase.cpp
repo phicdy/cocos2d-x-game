@@ -51,7 +51,7 @@ void SneakyJoystickSkinnedBase::setContentSize(CCSize s)
 	//joystick.joystickRadius = s.width/2;
 }
 
-void SneakyJoystickSkinnedBase::setBackgroundSprite(CCSprite *aSprite)
+void SneakyJoystickSkinnedBase::setBackgroundSprite(Sprite *aSprite)
 {
 	if(backgroundSprite){
 		if(backgroundSprite->getParent())
@@ -67,7 +67,7 @@ void SneakyJoystickSkinnedBase::setBackgroundSprite(CCSprite *aSprite)
 	}
 }
 
-void SneakyJoystickSkinnedBase::setThumbSprite(CCSprite *aSprite)
+void SneakyJoystickSkinnedBase::setThumbSprite(Sprite *aSprite)
 {
 	if(thumbSprite){
 		if(thumbSprite->getParent())
