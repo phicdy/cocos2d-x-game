@@ -92,16 +92,9 @@ void GameScene::initVirus() {
 	Size screensize = Director::getInstance()->getVisibleSize();
 	virus->setPosition(Vec2(screensize.width / 2, screensize.height / 2));
 	this->addChild(virus);
-
-	virus->runAction(MoveTo::create(5.0f,Point(virus->getPosition().x,50)));
-	this->schedule(schedule_selector(GameScene::updateVirus), 0.6f);
 }
 
 void GameScene::updateVirus(float delta) {
-
-	Size winSize = Director::getInstance()->getVisibleSize();
-//	CCLog("%f",virus->getPosition().x);
-//	virus->runAction(MoveTo::create(5.0f,Point(virus->getPosition().x,50)));
 }
 
 void GameScene::checkForCollision() {
