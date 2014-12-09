@@ -5,6 +5,7 @@
  *      Author: pluea
  */
 
+#include "GameScene.h"
 #include "InputLayer.h"
 #include "SneakyButton.h"
 #include "SneakyButtonSkinnedBase.h"
@@ -40,8 +41,17 @@ void InputLayer::addFireButton() {
 }
 
 void InputLayer::update(float delta) {
-	if (fireButton->getIsActive()) {
+	totalTime += delta;
+	if (fireButton->getIsActive() && totalTime > nextShotTime) {
+		nextShotTime = totalTime + 0.5f;
+
+		GameScene *game = GameScene::getSharedGameScene();
+		game->shootBulletFromTrendoc(game->trendoc);
 		CCLOG("Fire!");
+	}
+
+	if (!fireButton->getIsActive()) {
+		nextShotTime = 0;
 	}
 }
 
