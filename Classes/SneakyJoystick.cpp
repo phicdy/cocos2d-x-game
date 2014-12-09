@@ -46,6 +46,7 @@ bool SneakyJoystick::initWithRect(Rect rect)
 		touchListener->onTouchCancelled = [this](Touch* touch, Event* event) {
 			ccTouchCancelled(touch, event);
 		};
+		this->getEventDispatcher()->addEventListenerWithFixedPriority(touchListener, 1);
 
 		pRet = true;
 	//}
