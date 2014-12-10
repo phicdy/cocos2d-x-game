@@ -32,6 +32,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
+    glview->setDesignResolutionSize(960, 640, kResolutionExactFit);
+
     // create a scene. it's an autorelease object
     auto scene = GameScene::scene();
 
