@@ -9,8 +9,6 @@ void Entity::setPosition(float x, float y) {
 		float halfWidth = this->getContentSize().width * 0.5f;
 		float halfHeight = this->getContentSize().height * 0.5f;
 
-		Size screensize = Director::getInstance()->getVisibleSize();
-
 		if (x < halfWidth) {
 			x = halfWidth;
 		}else if (x > (screensize.width - halfWidth)) {
