@@ -5,6 +5,7 @@
 
 class Entity : public cocos2d::Sprite {
 public:
+	void setPosition(float x, float y);
 	CREATE_FUNC(Entity);
 };
 
