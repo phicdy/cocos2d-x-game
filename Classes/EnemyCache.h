@@ -5,6 +5,9 @@
 
 class EnemyCache : public cocos2d::Node {
 public:
+	cocos2d::SpriteBatchNode* batch;
+	cocos2d::CCArray *enemies;
+	void initEnemies();
 	CREATE_FUNC(EnemyCache);
 };
 
