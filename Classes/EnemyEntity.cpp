@@ -43,8 +43,24 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 	return (EnemyEntity*)enemy;
 }
 
-void EnemyEntity::initSpawnFrequency() {
+static Map<EnemyEntity::EnemyTypes, int> spawnFrequency;
 
+void EnemyEntity::initSpawnFrequency() {
+	// initialize how frequent the enemies will spawn
+	if (spawnFrequency == NULL) {
+		spawnFrequency = CCArray::create();
+		spawnFrequency ->initWithCapacity(EnemyType_MAX);
+		spawnFrequency->insertObject(EnemyTypeVirus, 80);
+		spawnFrequency->insertObject(EnemyTypeBoss, 1500);
+
+		// spawn one enemy immediately
+		spawn();
+	}
+
+}
+
+int EnemyEntity::getSpawnFrequencyForEnemyType(EnemyTypes enemyType) {
+	return spawnFrequency->getObjectAtIndex(enemyType);
 }
 
 void EnemyEntity::spawn() {
