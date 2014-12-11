@@ -6,7 +6,7 @@
 class Entity : public cocos2d::Sprite {
 public:
 	void setPosition(float x, float y);
-	Entity* initWithFilename(std::string filename);
+	static Entity* initWithFilename(std::string filename);
 	CREATE_FUNC(Entity);
 };
 
