@@ -1,4 +1,5 @@
 #include "EnemyEntity.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 
@@ -45,4 +46,17 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 void EnemyEntity::initSpawnFrequency() {
 
 }
+
+void EnemyEntity::spawn() {
+	// Select a spawn location just outside the right side of the screen, with random y position
+	Size screenSize = GameScene::getSharedGameScene()->getContentSize();
+	Size spriteSize = this->getContentSize();
+	float xPos = screenSize.width + spriteSize.width * 0.5f;
+	float yPos = CCRANDOM_0_1() * (screenSize.height - spriteSize.height) + spriteSize.height * 0.5f;
+	this->setPosition(xPos, yPos);
+
+	// Finally set yourself to be visible, this also flag the enemy as "in use"
+	this->setVisible(true);
+}
+
 
