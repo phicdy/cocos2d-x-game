@@ -35,9 +35,9 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 //		this->addChild(shootComponent);
 
 		// enemies start invisible
-		this->setVisible(false);
+		enemy->setVisible(false);
 
-		initSpawnFrequency();
+		initSpawnFrequency((EnemyEntity*)enemy);
 	}
 
 	return (EnemyEntity*)enemy;
@@ -45,7 +45,7 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 
 static Map<EnemyEntity::EnemyTypes, int> spawnFrequency;
 
-void EnemyEntity::initSpawnFrequency() {
+void EnemyEntity::initSpawnFrequency(EnemyEntity *entity) {
 	// initialize how frequent the enemies will spawn
 	if (spawnFrequency == NULL) {
 		spawnFrequency = CCArray::create();
@@ -54,7 +54,7 @@ void EnemyEntity::initSpawnFrequency() {
 		spawnFrequency->insertObject(EnemyTypeBoss, 1500);
 
 		// spawn one enemy immediately
-		spawn();
+		spawn(entity);
 	}
 
 }
@@ -63,16 +63,16 @@ int EnemyEntity::getSpawnFrequencyForEnemyType(EnemyTypes enemyType) {
 	return spawnFrequency->getObjectAtIndex(enemyType);
 }
 
-void EnemyEntity::spawn() {
+void EnemyEntity::spawn(EnemyEntity *entity) {
 	// Select a spawn location just outside the right side of the screen, with random y position
 	Size screenSize = GameScene::getSharedGameScene()->getContentSize();
-	Size spriteSize = this->getContentSize();
+	Size spriteSize = entity->getContentSize();
 	float xPos = screenSize.width + spriteSize.width * 0.5f;
 	float yPos = CCRANDOM_0_1() * (screenSize.height - spriteSize.height) + spriteSize.height * 0.5f;
-	this->setPosition(xPos, yPos);
+	entity->setPosition(xPos, yPos);
 
 	// Finally set yourself to be visible, this also flag the enemy as "in use"
-	this->setVisible(true);
+	entity->setVisible(true);
 }
 
 
