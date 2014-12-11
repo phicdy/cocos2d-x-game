@@ -2,6 +2,22 @@
 #include "EnemyEntity.h"
 
 USING_NS_CC;
+
+bool EnemyCache::init() {
+
+	if (!Node::init()) {
+		return false;
+	}
+
+	batch = SpriteBatchNode::create("virus.png", 10);
+	this->addChild(batch);
+
+	initEnemies();
+	this->scheduleUpdate();
+
+	return true;
+}
+
 void EnemyCache::initEnemies() {
 
 	// create the enemies array containing further arrays for each type
@@ -38,6 +54,35 @@ void EnemyCache::initEnemies() {
 			EnemyEntity* enemy = EnemyEntity::enemyWithType((EnemyEntity::EnemyTypes)i);
 			batch->addChild(enemy, 0, i);
 			enemiesOfType->addObject(enemy);
+		}
+	}
+}
+
+void EnemyCache::update(float delta) {
+	updateCount++;
+
+	for (int i = EnemyEntity::EnemyType_MAX - 1; i >= 0; i--) {
+		int spawnFrequency = EnemyEntity::getSpawnFrequencyForEnemyType((EnemyEntity::EnemyTypes)i);
+
+		if (updateCount % spawnFrequency == 0) {
+			spawnEnemyOfType((EnemyEntity::EnemyTypes)i);
+			break;
+		}
+	}
+
+}
+
+void EnemyCache::spawnEnemyOfType(EnemyEntity::EnemyTypes enemyType) {
+	CCArray* enemiesOfType = (CCArray*)enemies->objectAtIndex(enemyType);
+
+	Ref* enemy;
+	CCARRAY_FOREACH(enemiesOfType, enemy) {
+		EnemyEntity *entity = (EnemyEntity*)enemy;
+		// find the first free enemy and respawn it
+		if (!entity->isVisible()) {
+			//CCLOG(@"spawn enemy type %i", enemyType);
+			entity->spawn(entity);
+			break;
 		}
 	}
 }
