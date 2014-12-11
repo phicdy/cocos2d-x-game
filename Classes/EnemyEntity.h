@@ -6,15 +6,15 @@
 
 class EnemyEntity : public Entity {
 public:
-	enum EnemyTypes {EnemyTypeVirus, EnemyTypeBoss, EnemyType_MAX};
+	enum EnemyTypes {EnemyTypeVirus=0, EnemyTypeBoss, EnemyType_MAX};
 
 	static EnemyEntity* enemyWithType(EnemyTypes enemyType);
-	int getSpawnFrequencyForEnemyType(EnemyTypes enemyType);
+	static int getSpawnFrequencyForEnemyType(EnemyTypes enemyType);
+	static void spawn(EnemyEntity *entity);
 
 	CREATE_FUNC(EnemyEntity);
 private:
 	static void initSpawnFrequency(EnemyEntity *entity);
-	static void spawn(EnemyEntity *entity);
 	static EnemyTypes type;
 };
 
