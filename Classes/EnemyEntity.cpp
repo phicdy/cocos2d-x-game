@@ -2,15 +2,15 @@
 
 USING_NS_CC;
 
-void EnemyEntity::enemyWithType(EnemyTypes enemyType) {
+EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 	type = enemyType;
 
-	String *frameName;
-	String *bulletFrameName;
+	std::string frameName;
+	std::string *bulletFrameName;
 	int shootFrequency = 300;
 	switch (type) {
 		case EnemyTypeVirus:
-			frameName = String::create("virus.png");
+			frameName = "virus.png";
 //			bulletFrameName = "candystick.png";
 			break;
 		case EnemyTypeBoss:
@@ -23,7 +23,8 @@ void EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 			break;
 	}
 
-	if (this = Entity::create(frameName)) {
+	auto enemy = Entity::initWithFilename(frameName);
+	if (enemy) {
 		// Create the game logic components
 //		[self addChild:[StandardMoveComponent node]];
 //
@@ -37,6 +38,8 @@ void EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 
 		initSpawnFrequency();
 	}
+
+	return (EnemyEntity*)enemy;
 }
 
 void EnemyEntity::initSpawnFrequency() {
