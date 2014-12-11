@@ -10,6 +10,8 @@ public:
 
 	EnemyEntity* enemyWithType(EnemyTypes enemyType);
 	void initSpawnFrequency();
+	void spawn();
+
 	CREATE_FUNC(EnemyEntity);
 private:
 	EnemyTypes type;
