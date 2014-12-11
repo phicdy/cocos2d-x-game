@@ -6,12 +6,12 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 	type = enemyType;
 
 	std::string frameName;
-	std::string *bulletFrameName;
+	std::string bulletFrameName;
 	int shootFrequency = 300;
 	switch (type) {
 		case EnemyTypeVirus:
 			frameName = "virus.png";
-//			bulletFrameName = "candystick.png";
+			bulletFrameName = "f5.png";
 			break;
 		case EnemyTypeBoss:
 //			frameName = @"monster-c.png";
