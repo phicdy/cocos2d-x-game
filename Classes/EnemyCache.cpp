@@ -51,7 +51,7 @@ void EnemyCache::initEnemies() {
 		int numEnemiesOfType = enemiesOfType->capacity();
 
 		for (int j = 0; j < numEnemiesOfType; j++) {
-			EnemyEntity* enemy = EnemyEntity::enemyWithType((EnemyEntity::EnemyTypes)i);
+			EnemyEntity* enemy = EnemyEntity::enemyWithType(i);
 			batch->addChild(enemy, 0, i);
 			enemiesOfType->addObject(enemy);
 		}
@@ -62,17 +62,17 @@ void EnemyCache::update(float delta) {
 	updateCount++;
 
 	for (int i = EnemyEntity::EnemyType_MAX - 1; i >= 0; i--) {
-		int spawnFrequency = EnemyEntity::getSpawnFrequencyForEnemyType((EnemyEntity::EnemyTypes)i);
+		int spawnFrequency = EnemyEntity::getSpawnFrequencyForEnemyType(i);
 
 		if (updateCount % spawnFrequency == 0) {
-			spawnEnemyOfType((EnemyEntity::EnemyTypes)i);
+			spawnEnemyOfType(i);
 			break;
 		}
 	}
 
 }
 
-void EnemyCache::spawnEnemyOfType(EnemyEntity::EnemyTypes enemyType) {
+void EnemyCache::spawnEnemyOfType(int enemyType) {
 	CCArray* enemiesOfType = (CCArray*)enemies->objectAtIndex(enemyType);
 
 	Ref* enemy;
