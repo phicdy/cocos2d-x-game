@@ -19,6 +19,23 @@ Bullet* Bullet::initWithBulletImage() {
 	return (Bullet*)bullet;
 }
 
+void Bullet::shootBulletAt(Point startPosition, Point vel, std::string frameName) {
+	velocity = vel;
+	this->setPosition(startPosition);
+	this->setVisible(true);
+
+	// change the bullet's texture by setting a different SpriteFrame to be displayed
+//	CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameName];
+	auto frame = Sprite::create(frameName);
+//	[self setDisplayFrame:frame];
+
+	this->schedule(schedule_selector(Bullet::updateBullet));
+
+	RotateBy *rotate = RotateBy::create(1, -360);
+	RepeatForever *repeaat = RepeatForever::create(rotate);
+	this->runAction(rotate);
+}
+
 void Bullet::shootBulletFromTrendoc(Sprite *trendoc) {
 	float spread = (CCRANDOM_0_1()- 0.5f) * 0.5f;
 	velocity = Point(1, spread);
