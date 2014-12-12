@@ -3,13 +3,11 @@
 
 USING_NS_CC;
 
-EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
-	type = enemyType;
-
+EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 	std::string frameName;
 	std::string bulletFrameName;
 	int shootFrequency = 300;
-	switch (type) {
+	switch (enemyType) {
 		case EnemyTypeVirus:
 			frameName = "virus.png";
 			bulletFrameName = "f5.png";
@@ -25,7 +23,9 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 	}
 
 	auto enemy = Entity::initWithFilename(frameName);
-	if (enemy) {
+	EnemyEntity *enemyEntity = (EnemyEntity*)enemy;
+	enemyEntity->type = enemyType;
+	if (enemyEntity) {
 		// Create the game logic components
 //		[self addChild:[StandardMoveComponent node]];
 //
@@ -35,12 +35,12 @@ EnemyEntity* EnemyEntity::enemyWithType(EnemyTypes enemyType) {
 //		this->addChild(shootComponent);
 
 		// enemies start invisible
-		enemy->setVisible(false);
+		enemyEntity->setVisible(false);
 
-		initSpawnFrequency((EnemyEntity*)enemy);
+		initSpawnFrequency(enemyEntity);
 	}
 
-	return (EnemyEntity*)enemy;
+	return enemyEntity;
 }
 
 static CCArray *spawnFrequency;
@@ -58,8 +58,9 @@ void EnemyEntity::initSpawnFrequency(EnemyEntity *entity) {
 
 }
 
-int EnemyEntity::getSpawnFrequencyForEnemyType(EnemyTypes enemyType) {
-	return spawnFrequency->getObjectAtIndex(enemyType);
+int EnemyEntity::getSpawnFrequencyForEnemyType(int enemyType) {
+	CCInteger *tmp = (CCInteger*)spawnFrequency->getObjectAtIndex(enemyType);
+	return tmp->getValue();
 }
 
 void EnemyEntity::spawn(EnemyEntity *entity) {

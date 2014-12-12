@@ -2,7 +2,6 @@
 #define ENEMYCACHE_H_
 
 #include "cocos2d.h"
-#include "EnemyEntity.h"
 
 class EnemyCache : public cocos2d::Node {
 public:
@@ -14,7 +13,7 @@ public:
 	virtual bool init();
 	void initEnemies();
 	void update(float delta);
-	void spawnEnemyOfType(EnemyEntity::EnemyTypes enemyType);
+	void spawnEnemyOfType(int enemyType);
 
 	CREATE_FUNC(EnemyCache);
 };
