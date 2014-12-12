@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/EnemyEntity.cpp \
                    ../../Classes/EnemyCache.cpp \
                    ../../Classes/StandardShootComponent.cpp \
+                   ../../Classes/BulletCache.cpp \
                    ../../Classes/Bullet.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
