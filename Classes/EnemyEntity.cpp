@@ -1,5 +1,6 @@
 #include "EnemyEntity.h"
 #include "GameScene.h"
+#include "StandardShootComponent.h"
 
 USING_NS_CC;
 
@@ -29,10 +30,10 @@ EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 		// Create the game logic components
 //		[self addChild:[StandardMoveComponent node]];
 //
-//		StandardShootComponent* shootComponent = [StandardShootComponent node];
-//		shootComponent.shootFrequency = shootFrequency;
-//		shootComponent.bulletFrameName = bulletFrameName;
-//		this->addChild(shootComponent);
+		StandardShootComponent *shootComponent = StandardShootComponent::create();
+		shootComponent->shootFrequency = shootFrequency;
+		shootComponent->bulletFrameName = bulletFrameName;
+		enemyEntity->addChild(shootComponent);
 
 		// enemies start invisible
 		enemyEntity->setVisible(false);
