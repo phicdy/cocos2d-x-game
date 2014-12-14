@@ -9,6 +9,7 @@
 #include "InputLayer.h"
 #include "Bullet.h"
 #include "SimpleAudioEngine.h"
+#include "EnemyCache.h"
 
 using namespace CocosDenshion;
 
@@ -87,11 +88,12 @@ void GameScene::initBackground() {
 }
 
 void GameScene::initVirus() {
-	virus = Sprite::create("virus.png");
-	virus->setTag(1);
-	Size screensize = Director::getInstance()->getVisibleSize();
-	virus->setPosition(Vec2(screensize.width / 2, screensize.height / 2));
-	this->addChild(virus);
+	EnemyCache *enemyCache = EnemyCache::create();
+	CCLog("create enemyCache!");
+	enemyCache->setTag(GameSceneNodeTagEnemyCache);
+	CCLog("setTag!");
+	this->addChild(enemyCache, 0);
+	CCLog("addChild!");
 }
 
 void GameScene::updateVirus(float delta) {
