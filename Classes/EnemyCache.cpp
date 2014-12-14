@@ -33,9 +33,9 @@ void EnemyCache::initEnemies() {
 		case EnemyEntity::EnemyTypeVirus:
 			capacity = 3;
 			break;
-		case EnemyEntity::EnemyTypeBoss:
-			capacity = 1;
-			break;
+//		case EnemyEntity::EnemyTypeBoss:
+//			capacity = 1;
+//			break;
 
 		default:
 			break;
@@ -63,9 +63,9 @@ void EnemyCache::update(float delta) {
 	updateCount++;
 
 	for (int i = EnemyEntity::EnemyType_MAX - 1; i >= 0; i--) {
-		int spawnFrequency = EnemyEntity::getSpawnFrequencyForEnemyType(i);
+//		int spawnFrequency = EnemyEntity::getSpawnFrequencyForEnemyType(i);
 
-		if (updateCount % spawnFrequency == 0) {
+		if (updateCount % 80 == 0) {
 			spawnEnemyOfType(i);
 			break;
 		}

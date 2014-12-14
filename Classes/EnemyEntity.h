@@ -7,8 +7,8 @@
 class EnemyEntity : public Entity {
 public:
 	static const int EnemyTypeVirus = 0;
-	static const int EnemyTypeBoss = 1;
-	static const int EnemyType_MAX = 2;
+//	static const int EnemyTypeBoss = 1;
+	static const int EnemyType_MAX = 1;
 	int type;
 
 	static EnemyEntity* enemyWithType(int enemyType);
