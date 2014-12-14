@@ -28,8 +28,7 @@ void BulletCache::shootBulletFrom(cocos2d::Point startPosition,
 	Node* node = bullets.at(nextInactiveBullet);
 
 	Bullet* bullet = (Bullet*)node;
-//	bullet->shoo
-//	[bullet shootBulletAt:startPosition velocity:velocity frameName:frameName];
+	bullet->shootBulletAt(startPosition, velocity, frameName);
 
 	nextInactiveBullet++;
 	if (nextInactiveBullet >= bullets.size())
