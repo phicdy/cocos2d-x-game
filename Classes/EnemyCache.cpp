@@ -44,7 +44,7 @@ void EnemyCache::initEnemies() {
 		// no alloc needed since the enemies array will retain anything added to it
 		CCArray* enemiesOfType = CCArray::create();
 		enemiesOfType->createWithCapacity(capacity);
-		enemies->addObject(enemiesOfType);
+		enemies->insertObject(enemiesOfType, i);
 	}
 
 	for (int i = 0; i < EnemyEntity::EnemyType_MAX; i++) {
@@ -74,7 +74,7 @@ void EnemyCache::update(float delta) {
 }
 
 void EnemyCache::spawnEnemyOfType(int enemyType) {
-	CCArray* enemiesOfType = (CCArray*)enemies->objectAtIndex(enemyType);
+	CCArray* enemiesOfType = (CCArray*)enemies->getObjectAtIndex(enemyType);
 
 	Ref* enemy;
 	CCARRAY_FOREACH(enemiesOfType, enemy) {
