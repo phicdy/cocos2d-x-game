@@ -159,6 +159,14 @@ void GameScene::initBullet() {
 	BulletCache *bulletCache = BulletCache::create();
 	bulletCache->setTag(GameSceneNodeTagBulletCache);
 	this->addChild(bulletCache, 1);
+
+	Bullet* tmp = Bullet::bullet();
+	SpriteFrame *frame = SpriteFrame::create("bullet.png", tmp->getBoundingBox());
+	SpriteFrameCache::getInstance()->addSpriteFrame(frame, "bullet.png");
+
+	Bullet* tmp2 = (Bullet*)Sprite::create("ffive.png");
+	SpriteFrame *frame2 = SpriteFrame::create("ffive.png", tmp2->getBoundingBox());
+	SpriteFrameCache::getInstance()->addSpriteFrame(frame2, "ffive.png");
 }
 
 BulletCache* GameScene::getBullet() {
