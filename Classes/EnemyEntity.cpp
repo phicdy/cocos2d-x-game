@@ -12,11 +12,11 @@ EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 			frameName = "virus.png";
 			bulletFrameName = "f5.png";
 			break;
-		case EnemyTypeBoss:
-//			frameName = @"monster-c.png";
-//			bulletFrameName = @"blackhole.png";
-			shootFrequency = 100;
-			break;
+//		case EnemyTypeBoss:
+////			frameName = @"monster-c.png";
+////			bulletFrameName = @"blackhole.png";
+//			shootFrequency = 100;
+//			break;
 
 		default:
 			break;
@@ -50,7 +50,7 @@ void EnemyEntity::initSpawnFrequency(EnemyEntity *entity) {
 	if (!spawnFrequency) {
 		spawnFrequency = CCArray::create();
 		spawnFrequency->insertObject(CCInteger::create(80), EnemyTypeVirus);
-		spawnFrequency->insertObject(CCInteger::create(1500), EnemyTypeBoss);
+//		spawnFrequency->insertObject(CCInteger::create(1500), EnemyTypeBoss);
 
 		// spawn one enemy immediately
 		spawn(entity);
