@@ -103,7 +103,7 @@ void GameScene::checkForCollision() {
 	if(nextInactiveBullet == 0) {
 		return;
 	}
-	SpriteBatchNode *bullets = this->getBullet();
+	BulletCache *bullets = this->getBullet();
 	Vector<Node*> bulletsArray = bullets->getChildren();
 
 	Node *node = bulletsArray.at(nextInactiveBullet-1);
@@ -156,34 +156,20 @@ void GameScene::checkForCollision() {
 }
 
 void GameScene::initBullet() {
-	SpriteBatchNode *batch = SpriteBatchNode::create("bullet.png", 10);
-	batch->setTag(3);
-	this->addChild(batch);
-
-	for (int i = 0; i < 100; i++) {
-		Bullet *bullet = Bullet::bullet();
-		bullet->setVisible(false);
-		batch->addChild(bullet);
-	}
+	BulletCache *bulletCache = BulletCache::create();
+	bulletCache->setTag(GameSceneNodeTagBulletCache);
+	this->addChild(bulletCache, 1);
 }
 
-SpriteBatchNode* GameScene::getBullet() {
-	Node *node = this->getChildByTag(3);
-	return (SpriteBatchNode*)node;
+BulletCache* GameScene::getBullet() {
+	Node *node = this->getChildByTag(GameSceneNodeTagBulletCache);
+	return (BulletCache*)node;
 }
 
 void GameScene::shootBulletFromTrendoc(cocos2d::Sprite *trendoc) {
-	SpriteBatchNode *bullets = this->getBullet();
-	Vector<Node*> bulletsArray = bullets->getChildren();
-
-	Node *node = bulletsArray.at(nextInactiveBullet);
-
-	Bullet *bullet = (Bullet*)node;
-	bullet->shootBulletFromTrendoc(trendoc);
-
-	// Set index
-	nextInactiveBullet++;
-	if(nextInactiveBullet >= bulletsArray.size()) {
-		nextInactiveBullet = 0;
-	}
+	BulletCache *bullets = this->getBullet();
+	Point trendocPos = CCPointMake(trendoc->getPosition().x + trendoc->getContentSize().width * 0.5f, trendoc->getPosition().y);
+	float spread = (CCRANDOM_0_1() - 0.5f) * 0.5f;
+	Point velocity = CCPointMake(4, spread);
+	bullets->shootBulletFrom(trendocPos, velocity, "bullet.png");
 }
