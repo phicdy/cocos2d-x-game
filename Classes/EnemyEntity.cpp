@@ -11,7 +11,7 @@ EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 	switch (enemyType) {
 		case EnemyTypeVirus:
 			frameName = "virus.png";
-			bulletFrameName = "f5.png";
+			bulletFrameName = "ffive.png";
 			break;
 //		case EnemyTypeBoss:
 ////			frameName = @"monster-c.png";
