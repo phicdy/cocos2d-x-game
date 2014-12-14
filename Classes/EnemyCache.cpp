@@ -23,6 +23,7 @@ void EnemyCache::initEnemies() {
 	// create the enemies array containing further arrays for each type
 	enemies = CCArray::create();
 	enemies->initWithCapacity(EnemyEntity::EnemyType_MAX);
+	enemies->retain();
 
 	// create the arrays for each type
 	for (int i = 0; i < EnemyEntity::EnemyType_MAX; i++) {
