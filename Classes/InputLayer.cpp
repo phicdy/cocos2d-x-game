@@ -70,7 +70,17 @@ void InputLayer::update(float delta) {
 		nextShotTime = totalTime + 0.5f;
 
 		game->shootBulletFromTrendoc(game->trendoc);
-		CCLOG("Fire!");
+
+		GameScene* game = GameScene::getSharedGameScene();
+		BulletCache* bulletCache = game->getBullet();
+
+		// Set the position, velocity and spriteframe before shooting
+		Point shotPos = CCPointMake(
+				game->trendoc->getPosition().x + game->trendoc->getContentSize().width * 0.5f,
+				game->trendoc->getPosition().y);
+		float spread = (CCRANDOM_0_1() - 0.5f) * 0.5f;
+		Point velocity = CCPointMake(4, spread);
+		bulletCache->shootBulletFrom(shotPos, velocity, "bullet.png");
 	}
 
 	if (!fireButton->getIsActive()) {

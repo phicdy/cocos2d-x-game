@@ -24,9 +24,8 @@ void Bullet::shootBulletAt(Point startPosition, Point vel, std::string frameName
 	this->setPosition(startPosition);
 	this->setVisible(true);
 
-	// change the bullet's texture by setting a different SpriteFrame to be displayed
-	CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName);
-	this->setDisplayFrame(frame);
+	auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+	this->setSpriteFrame(frame);
 
 	this->schedule(schedule_selector(Bullet::updateBullet));
 
