@@ -10,6 +10,7 @@
 
 #include "cocos2d.h"
 #include "SneakyJoystick.h"
+#include "BulletCache.h"
 
 class GameScene: public cocos2d::Layer {
 public:
@@ -32,10 +33,13 @@ public:
 	void updateVirus(float delta);
 	void checkForCollision();
 
-	cocos2d::SpriteBatchNode* getBullet();
+	BulletCache* getBullet();
 	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
 
 	CREATE_FUNC(GameScene);
+private:
+	int GameSceneNodeTagEnemyCache = 1;
+	int GameSceneNodeTagBulletCache = 3;
 };
 
 

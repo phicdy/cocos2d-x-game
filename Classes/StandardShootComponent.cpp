@@ -25,7 +25,7 @@ void StandardShootComponent::update(float delta) {
 			GameScene* game = GameScene::getSharedGameScene();
 			Point startPos = ccpSub(parent->getPosition(),
 					CCPointMake(parent->getContentSize().width * 0.5f, 0));
-//		[game.bulletCache shootBulletFrom:startPos velocity:CGPointMake(-2, 0) frameName:bulletFrameName];
+			game->getBullet()->shootBulletFrom(startPos, CCPointMake(-2, 0), bulletFrameName);
 	}
 }
 
