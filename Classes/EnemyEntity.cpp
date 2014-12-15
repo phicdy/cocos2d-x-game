@@ -1,6 +1,7 @@
 #include "EnemyEntity.h"
 #include "GameScene.h"
 #include "StandardShootComponent.h"
+#include "StandardMoveComponent.h"
 
 USING_NS_CC;
 
@@ -29,6 +30,7 @@ EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 	if (enemyEntity) {
 		// Create the game logic components
 //		[self addChild:[StandardMoveComponent node]];
+		enemyEntity->addChild(StandardMoveComponent::create());
 //
 		StandardShootComponent *shootComponent = StandardShootComponent::create();
 		shootComponent->shootFrequency = shootFrequency;
