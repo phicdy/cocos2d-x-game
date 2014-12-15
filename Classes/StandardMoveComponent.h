@@ -5,7 +5,12 @@
 
 class StandardMoveComponent : public cocos2d::Sprite {
 public:
-	CREATE_FUNC(StandardMoveComponent);
+	virtual bool init();
+	void update(float delta);
+
+private:
+	cocos2d::Point velocity;
+
 };
 
 #endif
