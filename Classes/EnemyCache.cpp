@@ -31,7 +31,7 @@ void EnemyCache::initEnemies() {
 		int capacity;
 		switch (i) {
 		case EnemyEntity::EnemyTypeVirus:
-			capacity = 3;
+			capacity = 50;
 			break;
 //		case EnemyEntity::EnemyTypeBoss:
 //			capacity = 1;
@@ -44,6 +44,7 @@ void EnemyCache::initEnemies() {
 		// no alloc needed since the enemies array will retain anything added to it
 		CCArray* enemiesOfType = CCArray::create();
 		enemiesOfType->createWithCapacity(capacity);
+		enemiesOfType->retain();
 		enemies->insertObject(enemiesOfType, i);
 	}
 

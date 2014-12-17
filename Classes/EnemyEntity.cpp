@@ -8,7 +8,7 @@ USING_NS_CC;
 EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 	std::string frameName;
 	std::string bulletFrameName;
-	int shootFrequency = 300;
+	int shootFrequency = 10;
 	switch (enemyType) {
 		case EnemyTypeVirus:
 			frameName = "virus.png";
@@ -56,7 +56,7 @@ void EnemyEntity::initSpawnFrequency(EnemyEntity *entity) {
 //		spawnFrequency->insertObject(CCInteger::create(1500), EnemyTypeBoss);
 
 		// spawn one enemy immediately
-		spawn(entity);
+//		spawn(entity);
 	}
 
 }
@@ -70,7 +70,7 @@ void EnemyEntity::spawn(EnemyEntity *entity) {
 	// Select a spawn location just outside the right side of the screen, with random y position
 	Size screenSize = GameScene::getSharedGameScene()->getContentSize();
 	Size spriteSize = entity->getContentSize();
-	float xPos = screenSize.width + spriteSize.width * 0.5f;
+	float xPos = screenSize.width - spriteSize.width * 0.5f;
 	float yPos = CCRANDOM_0_1() * (screenSize.height - spriteSize.height) + spriteSize.height * 0.5f;
 	entity->setPosition(xPos, yPos);
 

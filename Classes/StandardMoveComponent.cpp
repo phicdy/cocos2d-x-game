@@ -11,15 +11,21 @@ bool StandardMoveComponent::init() {
 
 	velocity = CCPointMake(-1, 0);
 
-	this->scheduleUpdate();
+	this->schedule(schedule_selector(StandardMoveComponent::updateMoveComponent));
 	return true;
 }
 
-void StandardMoveComponent::update(float delta) {
+void StandardMoveComponent::updateMoveComponent(float delta) {
 	if (this->getParent()->isVisible()) {
-		Entity* entity = (Entity*)this->getParent();
-		if (entity->getPosition().x > GameScene::getSharedGameScene()->getContentSize().width * 0.5f) {
-			entity->setPosition(ccpAdd(entity->getPosition(), velocity));
+		Node* entity = this->getParent();
+//		if (entity->getPosition().x > GameScene::getSharedGameScene()->getContentSize().width * 0.5f) {
+//			entity->setPosition(ccpAdd(entity->getPosition(), velocity));
+//		}
+		auto position = entity->getPosition();
+		position.x -= 1;
+		entity->setPosition(position);
+		if (position.x < 0) {
+			entity->setVisible(false);
 		}
 	}
 }
