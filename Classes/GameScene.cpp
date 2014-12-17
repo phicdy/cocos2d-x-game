@@ -160,12 +160,20 @@ void GameScene::initBullet() {
 	bulletCache->setTag(GameSceneNodeTagBulletCache);
 	this->addChild(bulletCache, 1);
 
-	Bullet* tmp = Bullet::bullet();
-	SpriteFrame *frame = SpriteFrame::create("bullet.png", tmp->getBoundingBox());
+//	Bullet* tmp = Bullet::bullet();
+//	SpriteFrame *frame = SpriteFrame::create("bullet.png", tmp->getBoundingBox());
+	Texture2D *texture = Director::getInstance()->getTextureCache()->addImage("bullet.png");
+	Rect bounds = Rect(0, 0, texture->getContentSize().width, texture->getContentSize().height);
+	SpriteFrame *frame = SpriteFrame::createWithTexture(texture, bounds);
+
 	SpriteFrameCache::getInstance()->addSpriteFrame(frame, "bullet.png");
 
-	Bullet* tmp2 = (Bullet*)Sprite::create("ffive.png");
-	SpriteFrame *frame2 = SpriteFrame::create("ffive.png", tmp2->getBoundingBox());
+//	Bullet* tmp2 = (Bullet*)Sprite::create("ffive.png");
+//	SpriteFrame *frame2 = SpriteFrame::create("ffive.png", tmp2->getBoundingBox());
+	Texture2D *texture2 = Director::getInstance()->getTextureCache()->addImage("ffive.png");
+	Rect bounds2 = Rect(0, 0, texture2->getContentSize().width, texture2->getContentSize().height);
+	SpriteFrame *frame2 = SpriteFrame::createWithTexture(texture2, bounds2);
+
 	SpriteFrameCache::getInstance()->addSpriteFrame(frame2, "ffive.png");
 }
 
@@ -175,9 +183,12 @@ BulletCache* GameScene::getBullet() {
 }
 
 void GameScene::shootBulletFromTrendoc(cocos2d::Sprite *trendoc) {
-	BulletCache *bullets = this->getBullet();
+//	BulletCache *bullets = this->getBullet();
 	Point trendocPos = CCPointMake(trendoc->getPosition().x + trendoc->getContentSize().width * 0.5f, trendoc->getPosition().y);
 	float spread = (CCRANDOM_0_1() - 0.5f) * 0.5f;
 	Point velocity = CCPointMake(4, spread);
-	bullets->shootBulletFrom(trendocPos, velocity, "bullet.png");
+//	bullets->shootBulletFrom(trendocPos, velocity, "bullet.png");
+	Bullet *bullet = Bullet::initWithBulletForDoc();
+	bullet->shootBulletAt(trendocPos, velocity, "bullet.png");
+
 }

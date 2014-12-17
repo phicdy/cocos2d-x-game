@@ -8,7 +8,7 @@ bool BulletCache::init() {
 		return false;
 	}
 
-	batch = SpriteBatchNode::create("bullet.png", 10);
+	batch = SpriteBatchNode::create("ffive.png", 10);
 	this->addChild(batch);
 
 	// Create a number of bullets up front and re-use them whenever necessary.
