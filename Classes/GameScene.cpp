@@ -61,7 +61,8 @@ bool GameScene::init() {
 
 	DogEntity* trendoc = DogEntity::dog();
 	trendoc->setPosition(trendoc->getContentSize().width / 2,screensize.height / 2);
-	this->addChild(trendoc, GameSceneNodeTagDog);
+	trendoc->setTag(GameSceneNodeTagDog);
+	this->addChild(trendoc);
 
 	SimpleAudioEngine::getInstance()->preloadEffect("collision.mp3");
 

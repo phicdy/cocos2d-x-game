@@ -21,7 +21,7 @@ public:
 	int nextInactiveBullet = 0;
 	SneakyJoystick *joystick;
 
-	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput,GameSceneNodeTagDog};
+	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput};
 
 	static cocos2d::Scene*scene();
 	static GameScene* getSharedGameScene();
@@ -40,6 +40,7 @@ public:
 	CREATE_FUNC(GameScene);
 private:
 	int GameSceneNodeTagEnemyCache = 1;
+	int GameSceneNodeTagDog = 2;
 	int GameSceneNodeTagBulletCache = 3;
 };
 
