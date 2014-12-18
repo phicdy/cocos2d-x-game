@@ -36,7 +36,6 @@ public:
 
 	BulletCache* getBullet();
 	DogEntity* getDog();
-	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
 
 	CREATE_FUNC(GameScene);
 private:
