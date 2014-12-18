@@ -77,7 +77,8 @@ void InputLayer::update(float delta) {
 		Point velocity = CCPointMake(15, 0);
 
 		Bullet *bullet = Bullet::initWithBulletForDoc();
-		bullet->setTag(100);
+		bullet->setTag(game->getDogBulletTag());
+		game->addDogBulletTag();
 		game->addChild(bullet);
 
 		bullet->shootBulletAt(trendocPos, velocity, "bullet.png");

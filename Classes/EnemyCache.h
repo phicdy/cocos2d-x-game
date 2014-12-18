@@ -14,6 +14,7 @@ public:
 	void initEnemies();
 	void update(float delta);
 	void spawnEnemyOfType(int enemyType);
+	void checkForBulletCollisions();
 
 	CREATE_FUNC(EnemyCache);
 };

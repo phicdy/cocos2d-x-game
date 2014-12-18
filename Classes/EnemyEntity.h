@@ -14,6 +14,7 @@ public:
 	static EnemyEntity* enemyWithType(int enemyType);
 	static int getSpawnFrequencyForEnemyType(int enemyType);
 	static void spawn(EnemyEntity *entity);
+	void gotHit();
 
 	CREATE_FUNC(EnemyEntity);
 private:
