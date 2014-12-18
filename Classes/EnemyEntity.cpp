@@ -8,7 +8,7 @@ USING_NS_CC;
 EnemyEntity* EnemyEntity::enemyWithType(int enemyType) {
 	std::string frameName;
 	std::string bulletFrameName;
-	int shootFrequency = 10;
+	int shootFrequency = 100;
 	switch (enemyType) {
 		case EnemyTypeVirus:
 			frameName = "virus.png";
