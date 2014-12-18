@@ -69,7 +69,7 @@ void InputLayer::update(float delta) {
 	if (fireButton->getIsActive() && totalTime > nextShotTime) {
 		nextShotTime = totalTime + 0.5f;
 
-		game->shootBulletFromTrendoc(game->trendoc);
+		game->shootBulletFromTrendoc(game->getDog());
 
 //		GameScene* game = GameScene::getSharedGameScene();
 //		BulletCache* bulletCache = game->getBullet();

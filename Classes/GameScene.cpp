@@ -10,6 +10,7 @@
 #include "Bullet.h"
 #include "SimpleAudioEngine.h"
 #include "EnemyCache.h"
+#include "DogEntity.h"
 
 using namespace CocosDenshion;
 
@@ -55,14 +56,12 @@ bool GameScene::init() {
 	initVirus();
 	initBullet();
 
-	trendoc = Sprite::create("trendoc.png");
-	trendoc->setTag(2);
-
 	auto director = Director::getInstance();
 	Size screensize = director->getWinSize();
 
+	DogEntity* trendoc = DogEntity::dog();
 	trendoc->setPosition(trendoc->getContentSize().width / 2,screensize.height / 2);
-	this->addChild(trendoc, 0);
+	this->addChild(trendoc, GameSceneNodeTagDog);
 
 	SimpleAudioEngine::getInstance()->preloadEffect("collision.mp3");
 
@@ -180,6 +179,11 @@ void GameScene::initBullet() {
 BulletCache* GameScene::getBullet() {
 	Node *node = this->getChildByTag(GameSceneNodeTagBulletCache);
 	return (BulletCache*)node;
+}
+
+DogEntity* GameScene::getDog() {
+	Node *node = this->getChildByTag(GameSceneNodeTagDog);
+	return (DogEntity*)node;
 }
 
 void GameScene::shootBulletFromTrendoc(cocos2d::Sprite *trendoc) {

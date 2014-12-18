@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 #include "SneakyJoystick.h"
 #include "BulletCache.h"
+#include "DogEntity.h"
 
 class GameScene: public cocos2d::Layer {
 public:
@@ -20,7 +21,7 @@ public:
 	int nextInactiveBullet = 0;
 	SneakyJoystick *joystick;
 
-	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput};
+	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput,GameSceneNodeTagDog};
 
 	static cocos2d::Scene*scene();
 	static GameScene* getSharedGameScene();
@@ -34,6 +35,7 @@ public:
 	void checkForCollision();
 
 	BulletCache* getBullet();
+	DogEntity* getDog();
 	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
 
 	CREATE_FUNC(GameScene);
