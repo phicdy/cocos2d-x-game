@@ -27,7 +27,6 @@ Bullet* Bullet::initWithBulletForDoc() {
 }
 
 void Bullet::shootBulletAt(Point startPosition, Point vel, std::string frameName) {
-	CCLog("shootBulletAt");
 	velocity = vel;
 	float spread = (CCRANDOM_0_1()- 0.5f) * 0.5f;
 //	velocity = Point(1, spread);
@@ -57,7 +56,6 @@ void Bullet::shootBulletFromTrendoc(Sprite *trendoc) {
 }
 
 void Bullet::updateBullet(float delta) {
-	CCLog("updateBullet");
 //	auto position = this->getPosition();
 //	position.x -= 15 ;
 //	this->setPosition(position);
