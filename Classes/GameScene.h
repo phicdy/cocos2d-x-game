@@ -20,6 +20,7 @@ public:
 	cocos2d::Sprite *virus;
 	int nextInactiveBullet = 0;
 	SneakyJoystick *joystick;
+	int GameSceneNodeTagBulletDogBulletStart = 100;
 
 	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput};
 
@@ -36,12 +37,15 @@ public:
 
 	BulletCache* getBullet();
 	DogEntity* getDog();
+	int getDogBulletTag();
+	void addDogBulletTag();
 
 	CREATE_FUNC(GameScene);
 private:
 	int GameSceneNodeTagEnemyCache = 1;
 	int GameSceneNodeTagDog = 2;
 	int GameSceneNodeTagBulletCache = 3;
+	int GameSceneNodeTagBulletDogBullet = 100;
 };
 
 

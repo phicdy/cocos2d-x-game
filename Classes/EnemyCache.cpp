@@ -1,5 +1,7 @@
 #include "EnemyCache.h"
 #include "EnemyEntity.h"
+#include "GameScene.h"
+#include "Bullet.h";
 
 USING_NS_CC;
 
@@ -72,6 +74,7 @@ void EnemyCache::update(float delta) {
 		}
 	}
 
+	this->checkForBulletCollisions();
 }
 
 void EnemyCache::spawnEnemyOfType(int enemyType) {
@@ -87,4 +90,32 @@ void EnemyCache::spawnEnemyOfType(int enemyType) {
 			break;
 		}
 	}
+}
+
+void EnemyCache::checkForBulletCollisions() {
+	for (auto node : batch->getChildren()) {
+		EnemyEntity* enemy = (EnemyEntity*)node;
+		if (enemy->isVisible()) {
+			GameScene *game = GameScene::getSharedGameScene();
+			int tag = game->getDogBulletTag();
+			Bullet* bullet;
+			for (int i = game->GameSceneNodeTagBulletDogBulletStart; i < tag; ++i) {
+				bullet = (Bullet*)GameScene::getSharedGameScene()->getChildByTag(i);
+				if (!bullet) {
+					break;
+				}
+				if (!bullet->isVisible()) {
+					continue;
+				}
+
+				if (enemy->getBoundingBox().intersectsRect(bullet->getBoundingBox())) {
+					// This enemy got hit ...
+					CCLog("hit!!");
+					bullet->setVisible(false);
+					enemy->gotHit();
+				}
+			}
+		}
+	}
+
 }
