@@ -185,14 +185,3 @@ DogEntity* GameScene::getDog() {
 	Node *node = this->getChildByTag(GameSceneNodeTagDog);
 	return (DogEntity*)node;
 }
-
-void GameScene::shootBulletFromTrendoc(cocos2d::Sprite *trendoc) {
-//	BulletCache *bullets = this->getBullet();
-	Point trendocPos = CCPointMake(trendoc->getPosition().x + trendoc->getContentSize().width * 0.5f, trendoc->getPosition().y);
-	float spread = (CCRANDOM_0_1() - 0.5f) * 0.5f;
-	Point velocity = CCPointMake(4, spread);
-//	bullets->shootBulletFrom(trendocPos, velocity, "bullet.png");
-	Bullet *bullet = Bullet::initWithBulletForDoc();
-	bullet->shootBulletAt(trendocPos, velocity, "bullet.png");
-
-}
