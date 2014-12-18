@@ -31,22 +31,11 @@ bool SneakyButton::initWithRect(CCRect rect)
 		setPosition(rect.origin); //not sure about this
 
 		auto touchListener = EventListenerTouchOneByOne::create();
-		touchListener->onTouchBegan = [this](Touch* touch, Event* event) -> bool {
-			ccTouchBegan(touch, event);
-		};
-
-		touchListener->onTouchMoved = [this](Touch* touch, Event* event) {
-			ccTouchMoved(touch, event);
-		};
-
-		touchListener->onTouchEnded = [this](Touch* touch, Event* event) {
-			ccTouchEnded(touch, event);
-		};
-
-		touchListener->onTouchCancelled = [this](Touch* touch, Event* event) {
-			ccTouchCancelled(touch, event);
-		};
-		this->getEventDispatcher()->addEventListenerWithFixedPriority(touchListener, 1);
+		touchListener->onTouchBegan = CC_CALLBACK_2(SneakyButton::ccTouchBegan, this);
+		touchListener->onTouchMoved = CC_CALLBACK_2(SneakyButton::ccTouchMoved, this);
+		touchListener->onTouchEnded = CC_CALLBACK_2(SneakyButton::ccTouchEnded, this);
+		touchListener->onTouchCancelled = CC_CALLBACK_2(SneakyButton::ccTouchCancelled, this);
+		this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 		pRet = true;
 	//}
@@ -69,6 +58,7 @@ void SneakyButton::setRadius(float r)
 
 bool SneakyButton::ccTouchBegan(CCTouch *touch, CCEvent *event)
 {
+	CCLog("onTouchBegan");
 	if (active) return false;
 	
 	CCPoint location = CCDirector::sharedDirector()->convertToGL(touch->getLocationInView());
@@ -94,6 +84,7 @@ return false;
 
 void SneakyButton::ccTouchMoved(CCTouch *touch, CCEvent *event)
 {
+	CCLog("onTouchMove");
 	if (!active) return;
 	
 	CCPoint location = CCDirector::sharedDirector()->convertToGL(touch->getLocationInView());
@@ -114,6 +105,7 @@ void SneakyButton::ccTouchMoved(CCTouch *touch, CCEvent *event)
 
 void SneakyButton::ccTouchEnded(CCTouch *touch, CCEvent *event)
 {
+	CCLog("onTouchEnded!!!");
 	if (!active) return;
 	if (isHoldable) value = 0;
 	if (isHoldable||isToggleable) active = false;
@@ -121,6 +113,7 @@ void SneakyButton::ccTouchEnded(CCTouch *touch, CCEvent *event)
 
 void SneakyButton::ccTouchCancelled(CCTouch *touch, CCEvent *event)
 {
+	CCLog("onTouchCancelled");
 	this->ccTouchEnded(touch, event);
 }
 
