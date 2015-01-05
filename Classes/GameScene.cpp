@@ -71,19 +71,58 @@ bool GameScene::init() {
 }
 
 void GameScene::update(float delta) {
+	Point pos1 = background1->getPosition();
+	Point pos2 = background2->getPosition();
 
+	pos1.x -= 5.0f;
+	pos2.x -= 5.0f;
 
-	checkForCollision();
+	auto director = Director::getInstance();
+	Size screensize = director->getWinSize();
+	if(pos1.x <=-(screensize.width*0.5f) )
+	{
+		pos1.x = pos2.x + screensize.width;
+	}
+
+	if(pos2.x <=-(screensize.width*0.5f) )
+	{
+		pos2.x = pos1.x + screensize.width;
+	}
+
+	background1->setPosition(pos1);
+	background2->setPosition(pos2);
+
+//	checkForCollision();
 }
 
 void GameScene::initBackground() {
+//	Size visibleSize = Director::getInstance()->getVisibleSize();
+//	//マルチレゾリューション
+//	Point origin = Director::getInstance()->getVisibleOrigin();
+//
+//	auto background = Sprite::create("background.jpg");
+//	//中央に表示されるように座標を設定
+//	background->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+//	//画像を追加　第2引数は表示する順番（背景だから一番下つまり0）
+//	this->addChild(background);
+//
+	background1 = Sprite::create("background.jpg");
+	background2 = Sprite::create("background.jpg");
 
-	//　背景
-	Size winSize = Director::getInstance()->getVisibleSize();
+	auto director = Director::getInstance();
+	Size screensize = director->getWinSize();
+	background1->setPosition(screensize.width*0.5f,screensize.height*0.5f);
+	addChild(background1);
 
-	auto _bg = LayerColor::create(Color4B::WHITE, winSize.width,
-			winSize.height);
-	this->addChild(_bg);
+	background2->setPosition(screensize.width+screensize.width*0.5f,screensize.height*0.5f);
+	addChild(background2);
+
+	//これをCCParallaxNodeクラスで利用します。
+//	ParallaxNode* prallNode = ParallaxNode::create();
+//	prallNode->setPosition(Point(-100,0));
+//	prallNode->addChild(sprite1, 1, Point(3,0), Point(240,200));
+//	prallNode->addChild(sprite2, 2, Point(1,0), Point(240,110));
+//	this->addChild(prallNode);
 }
 
 void GameScene::initVirus() {

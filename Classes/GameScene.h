@@ -18,6 +18,8 @@ public:
 	cocos2d::Point *trendocVelocity;
 	cocos2d::Sprite *trendoc;
 	cocos2d::Sprite *virus;
+	cocos2d::Sprite *background1;
+	cocos2d::Sprite *background2;
 	int nextInactiveBullet = 0;
 	SneakyJoystick *joystick;
 	int GameSceneNodeTagBulletDogBulletStart = 100;
