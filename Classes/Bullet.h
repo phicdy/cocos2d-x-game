@@ -12,7 +12,9 @@ public:
 
 	virtual bool init();
 	static Bullet* initWithBulletImage();
+	static Bullet* initWithBulletForDoc();
 	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
+	void shootBulletAt(cocos2d::Point startPosition, cocos2d::Point vel, std::string frameName);
 	void updateBullet(float delta);
 
 	CREATE_FUNC(Bullet);

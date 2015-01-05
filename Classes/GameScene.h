@@ -10,14 +10,19 @@
 
 #include "cocos2d.h"
 #include "SneakyJoystick.h"
+#include "BulletCache.h"
+#include "DogEntity.h"
 
 class GameScene: public cocos2d::Layer {
 public:
 	cocos2d::Point *trendocVelocity;
 	cocos2d::Sprite *trendoc;
 	cocos2d::Sprite *virus;
+	cocos2d::Sprite *background1;
+	cocos2d::Sprite *background2;
 	int nextInactiveBullet = 0;
 	SneakyJoystick *joystick;
+	int GameSceneNodeTagBulletDogBulletStart = 100;
 
 	enum LayerTag {GameSceneLayerTagGame,GameSceneLayerTagInput};
 
@@ -32,10 +37,17 @@ public:
 	void updateVirus(float delta);
 	void checkForCollision();
 
-	cocos2d::SpriteBatchNode* getBullet();
-	void shootBulletFromTrendoc(cocos2d::Sprite *trendoc);
+	BulletCache* getBullet();
+	DogEntity* getDog();
+	int getDogBulletTag();
+	void addDogBulletTag();
 
 	CREATE_FUNC(GameScene);
+private:
+	int GameSceneNodeTagEnemyCache = 1;
+	int GameSceneNodeTagDog = 2;
+	int GameSceneNodeTagBulletCache = 3;
+	int GameSceneNodeTagBulletDogBullet = 100;
 };
 
 

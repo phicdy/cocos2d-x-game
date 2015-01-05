@@ -24,3 +24,8 @@ void Entity::setPosition(float x, float y) {
 	}
 	Sprite::setPosition(x, y);
 }
+
+Entity* Entity::initWithFilename(std::string filename) {
+	auto entity = Sprite::create(filename);
+	return (Entity*)entity;
+}

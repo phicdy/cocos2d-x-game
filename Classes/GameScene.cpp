@@ -8,10 +8,11 @@
 #include "GameScene.h"
 #include "InputLayer.h"
 #include "Bullet.h"
+#include "EnemyCache.h"
+#include "DogEntity.h"
 #include "SimpleAudioEngine.h"
 
 using namespace CocosDenshion;
-
 USING_NS_CC;
 
 static GameScene *instanceOfGameScene;
@@ -54,14 +55,13 @@ bool GameScene::init() {
 	initVirus();
 	initBullet();
 
-	trendoc = Sprite::create("trendoc.png");
-	trendoc->setTag(2);
-
 	auto director = Director::getInstance();
 	Size screensize = director->getWinSize();
 
+	DogEntity* trendoc = DogEntity::dog();
 	trendoc->setPosition(trendoc->getContentSize().width / 2,screensize.height / 2);
-	this->addChild(trendoc, 0);
+	trendoc->setTag(GameSceneNodeTagDog);
+	this->addChild(trendoc);
 
 	SimpleAudioEngine::getInstance()->preloadEffect("collision.mp3");
 
@@ -71,117 +71,135 @@ bool GameScene::init() {
 }
 
 void GameScene::update(float delta) {
+	Point pos1 = background1->getPosition();
+	Point pos2 = background2->getPosition();
 
+	pos1.x -= 5.0f;
+	pos2.x -= 5.0f;
 
-	checkForCollision();
+	auto director = Director::getInstance();
+	Size screensize = director->getWinSize();
+	if(pos1.x <=-(screensize.width*0.5f) )
+	{
+		pos1.x = pos2.x + screensize.width;
+	}
+
+	if(pos2.x <=-(screensize.width*0.5f) )
+	{
+		pos2.x = pos1.x + screensize.width;
+	}
+
+	background1->setPosition(pos1);
+	background2->setPosition(pos2);
+
+//	checkForCollision();
 }
 
 void GameScene::initBackground() {
+//	Size visibleSize = Director::getInstance()->getVisibleSize();
+//	//マルチレゾリューション
+//	Point origin = Director::getInstance()->getVisibleOrigin();
+//
+//	auto background = Sprite::create("background.jpg");
+//	//中央に表示されるように座標を設定
+//	background->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+//	//画像を追加　第2引数は表示する順番（背景だから一番下つまり0）
+//	this->addChild(background);
+//
+	background1 = Sprite::create("background.jpg");
+	background2 = Sprite::create("background.jpg");
 
-	//　背景
-	Size winSize = Director::getInstance()->getVisibleSize();
+	auto director = Director::getInstance();
+	Size screensize = director->getWinSize();
+	background1->setPosition(screensize.width*0.5f,screensize.height*0.5f);
+	addChild(background1);
 
-	auto _bg = LayerColor::create(Color4B::WHITE, winSize.width,
-			winSize.height);
-	this->addChild(_bg);
+	background2->setPosition(screensize.width+screensize.width*0.5f,screensize.height*0.5f);
+	addChild(background2);
+
+	//これをCCParallaxNodeクラスで利用します。
+//	ParallaxNode* prallNode = ParallaxNode::create();
+//	prallNode->setPosition(Point(-100,0));
+//	prallNode->addChild(sprite1, 1, Point(3,0), Point(240,200));
+//	prallNode->addChild(sprite2, 2, Point(1,0), Point(240,110));
+//	this->addChild(prallNode);
 }
 
 void GameScene::initVirus() {
-	virus = Sprite::create("virus.png");
-	virus->setTag(1);
-	Size screensize = Director::getInstance()->getVisibleSize();
-	virus->setPosition(Vec2(screensize.width / 2, screensize.height / 2));
-	this->addChild(virus);
+	EnemyCache *enemyCache = EnemyCache::create();
+	CCLog("create enemyCache!");
+	enemyCache->setTag(GameSceneNodeTagEnemyCache);
+	CCLog("setTag!");
+	this->addChild(enemyCache);
+	CCLog("addChild!");
 }
 
 void GameScene::updateVirus(float delta) {
 }
-
+//
 void GameScene::checkForCollision() {
-	if(nextInactiveBullet == 0) {
-		return;
-	}
-	SpriteBatchNode *bullets = this->getBullet();
-	Vector<Node*> bulletsArray = bullets->getChildren();
 
-	Node *node = bulletsArray.at(nextInactiveBullet-1);
-	if (virus->getBoundingBox().intersectsRect(node->getBoundingBox())) {
-		CCLog("Collision!");
-		virus->unscheduleAllCallbacks();
-
-		node->setPosition(-1,-1);
-		node->setVisible(false);
-		node->unscheduleAllCallbacks();
-		SimpleAudioEngine::getInstance()->setEffectsVolume(0.5f);
-		SimpleAudioEngine::getInstance()->playEffect("collision.mp3");
-
-		CCAnimation* animation = CCAnimation::create();
-
-		// 移動1 → 停止 → 移動2 → 停止の4コマアニメーション
-		animation->addSpriteFrameWithFileName("explosion1.png");
-		animation->addSpriteFrameWithFileName("explosion2.png");
-		animation->addSpriteFrameWithFileName("explosion3.png");
-		animation->addSpriteFrameWithFileName("explosion4.png");
-		animation->addSpriteFrameWithFileName("explosion5.png");
-		animation->addSpriteFrameWithFileName("explosion6.png");
-		animation->addSpriteFrameWithFileName("explosion7.png");
-		animation->addSpriteFrameWithFileName("explosion8.png");
-		animation->addSpriteFrameWithFileName("explosion9.png");
-		animation->addSpriteFrameWithFileName("explosion10.png");
-		animation->addSpriteFrameWithFileName("explosion11.png");
-		animation->addSpriteFrameWithFileName("explosion12.png");
-		animation->addSpriteFrameWithFileName("explosion13.png");
-		animation->addSpriteFrameWithFileName("explosion14.png");
-		animation->addSpriteFrameWithFileName("explosion15.png");
-
-		//アニメーションの設定 1 : 1コマ0.1秒で切り替える。
-		animation->setDelayPerUnit(0.1);
-		//アニメーションの設定 2 : 5回ループさせる。
-		//(4コマかける5回ループで2秒になり、移動同時に終了するようにしている)
-		animation->setLoops(1);
-		//4. アニメーションの実行
-		CCAnimate* animate = CCAnimate::create(animation);
-//		virus->runAction(animate);
-		CallFunc *compCallFunc = CallFunc::create([this](){
-			virus->setVisible(false);
-			virus->setPosition(-100,-100);
-		 });
-
-		 Sequence *sequence = Sequence::create(animate,compCallFunc,NULL);
-
-		 virus->runAction(sequence);
-	}
 }
+//	if(nextInactiveBullet == 0) {
+//		return;
+//	}
+//	BulletCache *bullets = this->getBullet();
+//	Node *node = this->getChildByTag(GameSceneNodeTagBulletCache);
+//	EnemyCache* enemyCache = (EnemyCache*)node;
+//
+//	for (i = 0; i < 50; ++i) {
+//		Node *a = enemyCache->get
+//		for (var = GameSceneNodeTagBulletDogBulletStart; var < GameSceneNodeTagBulletDogBullet; ++var) {
+//			Node *tmp = this->getChildByTag(var);
+//			Bullet *bulletOfDog = (Bullet*)tmp;
+//
+//			node = bulletsArray.at(nextInactiveBullet-1);
+//			if (virus->getBoundingBox().intersectsRect(bulletOfDog->getBoundingBox())) {
+//				CCLog("Collision!");
+//				virus->unscheduleAllCallbacks();
+//
+//				//collision
+//			}
+//		}
+//	}
+//}
 
 void GameScene::initBullet() {
-	SpriteBatchNode *batch = SpriteBatchNode::create("bullet.png", 10);
-	batch->setTag(3);
-	this->addChild(batch);
+	BulletCache *bulletCache = BulletCache::create();
+	bulletCache->setTag(GameSceneNodeTagBulletCache);
+	this->addChild(bulletCache);
 
-	for (int i = 0; i < 100; i++) {
-		Bullet *bullet = Bullet::bullet();
-		bullet->setVisible(false);
-		batch->addChild(bullet);
-	}
+//	Bullet* tmp = Bullet::bullet();
+//	SpriteFrame *frame = SpriteFrame::create("bullet.png", tmp->getBoundingBox());
+	Texture2D *texture = Director::getInstance()->getTextureCache()->addImage("bullet.png");
+	Rect bounds = Rect(0, 0, texture->getContentSize().width, texture->getContentSize().height);
+	SpriteFrame *frame = SpriteFrame::createWithTexture(texture, bounds);
+
+	SpriteFrameCache::getInstance()->addSpriteFrame(frame, "bullet.png");
+
+//	Bullet* tmp2 = (Bullet*)Sprite::create("ffive.png");
+//	SpriteFrame *frame2 = SpriteFrame::create("ffive.png", tmp2->getBoundingBox());
+	Texture2D *texture2 = Director::getInstance()->getTextureCache()->addImage("ffive.png");
+	Rect bounds2 = Rect(0, 0, texture2->getContentSize().width, texture2->getContentSize().height);
+	SpriteFrame *frame2 = SpriteFrame::createWithTexture(texture2, bounds2);
+
+	SpriteFrameCache::getInstance()->addSpriteFrame(frame2, "ffive.png");
 }
 
-SpriteBatchNode* GameScene::getBullet() {
-	Node *node = this->getChildByTag(3);
-	return (SpriteBatchNode*)node;
+BulletCache* GameScene::getBullet() {
+	Node *node = this->getChildByTag(GameSceneNodeTagBulletCache);
+	return (BulletCache*)node;
 }
 
-void GameScene::shootBulletFromTrendoc(cocos2d::Sprite *trendoc) {
-	SpriteBatchNode *bullets = this->getBullet();
-	Vector<Node*> bulletsArray = bullets->getChildren();
+DogEntity* GameScene::getDog() {
+	Node *node = this->getChildByTag(GameSceneNodeTagDog);
+	return (DogEntity*)node;
+}
 
-	Node *node = bulletsArray.at(nextInactiveBullet);
+int GameScene::getDogBulletTag() {
+	return GameSceneNodeTagBulletDogBullet;
+}
 
-	Bullet *bullet = (Bullet*)node;
-	bullet->shootBulletFromTrendoc(trendoc);
-
-	// Set index
-	nextInactiveBullet++;
-	if(nextInactiveBullet >= bulletsArray.size()) {
-		nextInactiveBullet = 0;
-	}
+void GameScene::addDogBulletTag() {
+	GameSceneNodeTagBulletDogBullet++;
 }

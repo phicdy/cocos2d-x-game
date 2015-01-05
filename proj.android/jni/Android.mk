@@ -20,6 +20,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/InputLayer.cpp \
                    ../../Classes/Entity.cpp \
                    ../../Classes/EnemyEntity.cpp \
+                   ../../Classes/EnemyCache.cpp \
+                   ../../Classes/StandardShootComponent.cpp \
+                   ../../Classes/StandardMoveComponent.cpp \
+                   ../../Classes/BulletCache.cpp \
+                   ../../Classes/DogEntity.cpp \
                    ../../Classes/Bullet.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

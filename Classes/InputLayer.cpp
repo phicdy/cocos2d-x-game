@@ -11,6 +11,8 @@
 #include "SneakyButtonSkinnedBase.h"
 #include "SneakyJoystick.h"
 #include "SneakyJoystickSkinnedBase.h"
+#include "DogEntity.h"
+#include "Bullet.h"
 
 USING_NS_CC;
 
@@ -69,15 +71,24 @@ void InputLayer::update(float delta) {
 	if (fireButton->getIsActive() && totalTime > nextShotTime) {
 		nextShotTime = totalTime + 0.5f;
 
-		game->shootBulletFromTrendoc(game->trendoc);
-		CCLOG("Fire!");
+		DogEntity* trendoc = game->getDog();
+		Point trendocPos = CCPointMake(trendoc->getPosition().x + trendoc->getContentSize().width * 0.5f, trendoc->getPosition().y);
+		float spread = (CCRANDOM_0_1() - 0.5f) * 0.5f;
+		Point velocity = CCPointMake(15, 0);
+
+		Bullet *bullet = Bullet::initWithBulletForDoc();
+		bullet->setTag(game->getDogBulletTag());
+		game->addDogBulletTag();
+		game->addChild(bullet);
+
+		bullet->shootBulletAt(trendocPos, velocity, "bullet.png");
 	}
 
 	if (!fireButton->getIsActive()) {
 		nextShotTime = 0;
 	}
 
-	Sprite *trendoc = game->trendoc;
+	DogEntity *trendoc = game->getDog();
 	Point velocity = ccpMult(joystick->getVelocity(), 200);
 	if (velocity.x != 0 && velocity.y != 0) {
 		float newX = trendoc->getPosition().x + velocity.x * delta;
